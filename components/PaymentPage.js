@@ -139,7 +139,7 @@ const PaymentPage = ({ username }) => {
           <span className="font-bold text-purple-400">TrustPayHub!</span>
         </div>
         <div className="text-slate-400 text-base">
-          <span className="font-semibold text-white">{payments.length}</span>{" "}
+          <span className="font-semibold text-black dark:text-white">{payments.length}</span>{" "}
           Payments ·{" "}
           <span className="font-semibold text-green-400">
             ₹{payments.reduce((a, b) => a + b.amount, 0)}
@@ -147,8 +147,8 @@ const PaymentPage = ({ username }) => {
           raised
         </div>
 
-        <div className="payment flex gap-6 w-full max-w-5xl mt-16 flex-col md:flex-row">
-          <div className="supporters w-full md:w-1/2 bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl text-white px-4 py-8 md:p-10 border border-white/20">
+      <div className="payment flex gap-6 w-full max-w-5xl mt-16 flex-col md:flex-row">
+          <div className="supporters w-full md:w-1/2 bg-black/10 dark:bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl text-black dark:text-white px-4 py-8 md:p-10 border border-black/20 dark:border-white/20">
             <h2 className="text-2xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500">
               Top Supporters
             </h2>
@@ -159,7 +159,7 @@ const PaymentPage = ({ username }) => {
               {payments.slice(0, 7).map((p, i) => (
                 <li
                   key={i}
-                  className="flex gap-3 items-center bg-white/10 rounded-lg p-3 shadow"
+                  className="flex gap-3 items-center bg-black/10 dark:bg-white/10 rounded-lg p-3 shadow"
                 >
                   <Image
                     width={36}
@@ -169,10 +169,10 @@ const PaymentPage = ({ username }) => {
                     className="rounded-full border-2 border-purple-400"
                   />
                   <div>
-                    <span className="font-bold text-purple-300">{p.name}</span>{" "}
+                    <span className="font-bold text-purple-700 dark:text-purple-300">{p.name}</span>{" "}
                     donated{" "}
                     <span className="font-bold text-green-400">₹{p.amount}</span>
-                    <div className="text-sm text-slate-300">
+                    <div className="text-sm text-slate-700 dark:text-slate-300">
                       "{p.message}"
                     </div>
                   </div>
@@ -181,7 +181,7 @@ const PaymentPage = ({ username }) => {
             </ul>
           </div>
 
-          <div className="makePayment w-full md:w-1/2 bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl text-white px-4 py-8 md:p-10 border border-white/20">
+          <div className="makePayment w-full md:w-1/2 bg-black/10 dark:bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl text-black dark:text-white px-4 py-8 md:p-10 border border-black/20 dark:border-white/20">
             <h2 className="text-2xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">
               Make a Payment
             </h2>
@@ -191,7 +191,7 @@ const PaymentPage = ({ username }) => {
                 value={paymentform.name}
                 name="name"
                 type="text"
-                className="w-full p-3 rounded-lg bg-slate-800 border border-purple-400 focus:border-pink-400 focus:ring-2 focus:ring-purple-400 text-white placeholder:text-slate-400"
+                className="w-full p-3 rounded-lg bg-white dark:bg-slate-800 border border-purple-400 focus:border-pink-400 focus:ring-2 focus:ring-purple-400 text-black dark:text-white placeholder:text-slate-400"
                 placeholder="Enter Name"
               />
               <input
@@ -199,7 +199,7 @@ const PaymentPage = ({ username }) => {
                 value={paymentform.message}
                 name="message"
                 type="text"
-                className="w-full p-3 rounded-lg bg-slate-800 border border-purple-400 focus:border-pink-400 focus:ring-2 focus:ring-purple-400 text-white placeholder:text-slate-400"
+                className="w-full p-3 rounded-lg bg-white dark:bg-slate-800 border border-purple-400 focus:border-pink-400 focus:ring-2 focus:ring-purple-400 text-black dark:text-white placeholder:text-slate-400"
                 placeholder="Enter Message"
               />
               <input
@@ -208,7 +208,7 @@ const PaymentPage = ({ username }) => {
                 name="amount"
                 type="number"
                 min="1"
-                className="w-full p-3 rounded-lg bg-slate-800 border border-purple-400 focus:border-pink-400 focus:ring-2 focus:ring-purple-400 text-white placeholder:text-slate-400"
+                className="w-full p-3 rounded-lg bg-white dark:bg-slate-800 border border-purple-400 focus:border-pink-400 focus:ring-2 focus:ring-purple-400 text-black dark:text-white placeholder:text-slate-400"
                 placeholder="Enter Amount"
               />
               <button
@@ -216,7 +216,7 @@ const PaymentPage = ({ username }) => {
                   pay(Number.parseInt(paymentform.amount || "0") * 100)
                 }
                 type="button"
-                className="flex items-center justify-center gap-2 text-white bg-gradient-to-br from-purple-900 to-blue-900 hover:scale-105 transition-transform duration-200 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-xl text-base px-6 py-3 shadow-lg disabled:bg-slate-600 disabled:from-purple-100"
+                className="flex items-center justify-center gap-2 text-white dark:text-white bg-gradient-to-br from-purple-600 to-blue-500 dark:from-purple-900 dark:to-blue-900 hover:scale-105 transition-transform duration-200 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-xl text-base px-6 py-3 shadow-lg disabled:bg-slate-600 disabled:from-purple-100"
                 disabled={
                   paymentform.name?.length < 3 ||
                   paymentform.message?.length < 4 ||

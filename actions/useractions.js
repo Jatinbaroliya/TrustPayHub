@@ -55,7 +55,6 @@ export const fetchpayments = async (username) => {
     await connectDb()
     const payments = await Payment.find({ to_user: username, done: true })
         .sort({ amount: -1 })
-        .limit(7)
         .lean()
 
     // Convert ObjectIds and BSON types to strings

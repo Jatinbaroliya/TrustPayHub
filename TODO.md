@@ -1,0 +1,6 @@
+- [ ] Add darkMode: 'class' to tailwind.config.js
+- [ ] Create ThemeProvider component to manage theme state and apply 'dark' class to html
+- [ ] Update app/layout.js to wrap children with ThemeProvider
+- [ ] Update components/ThemeToggle.js to use ThemeProvider context instead of direct body manipulation
+- [ ] Update app/page.js to use dark: classes for dark mode and include ThemeToggle component
+- [ ] Test theme switching on home page

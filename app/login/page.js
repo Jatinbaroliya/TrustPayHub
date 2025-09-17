@@ -16,7 +16,7 @@ const Login = () => {
   }, [router, session]);
 
   return (
-    <div className='mx-auto py-16 text-white'>
+    <div className='mx-auto py-16 text-black dark:text-white'>
       <h1 className='text-center text-3xl font-bold'>
         Login to Get Started
       </h1>

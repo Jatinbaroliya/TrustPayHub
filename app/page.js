@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Home() {
   return (
     <>
-      <div className="flex flex-col justify-center items-center gap-6 text-white min-h-[50vh] px-5 md:px-0 text-xs md:text-base">
-        <div className="bg-white/10 backdrop-blur-lg shadow-2xl rounded-2xl p-8 w-full max-w-2xl flex flex-col items-center gap-4 border border-white/20 mt-8 mb-8">
+      <div className="flex flex-col justify-center items-center gap-6 text-black dark:text-white min-h-[50vh] px-5 md:px-0 text-xs md:text-base">
+        <div className="bg-black/10 dark:bg-white/10 backdrop-blur-lg shadow-2xl rounded-2xl p-8 w-full max-w-2xl flex flex-col items-center gap-4 border border-black/20 dark:border-white/20 mt-8 mb-8 relative">
           <div className="md:text-6xl font-extrabold flex items-center justify-center md:gap-6 gap-3 text-4xl">
             <span className="text-5xl font-extrabold italic tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-400 to-blue-500 drop-shadow-lg">
               TrustPayHub
@@ -15,15 +16,15 @@ export default function Home() {
               height={56}
               src="/logo.png"
               alt="Help handshake"
-              className="rounded-full bg-black shadow-lg border-2 border-white/30"
+              className="rounded-full bg-white dark:bg-black shadow-lg border-2 border-black/30 dark:border-white/30"
             />
           </div>
 
-          <p className="text-center text-lg md:text-xl font-medium text-white/90">
+          <p className="text-center text-lg md:text-xl font-medium text-black/90 dark:text-white/90">
             A modern crowdfunding platform. Get funded by your fans and followers.
             Start now!
           </p>
-          <p className="text-center text-base md:text-lg text-white/80">
+          <p className="text-center text-base md:text-lg text-black/80 dark:text-white/80">
             A place where your fans can help you. Unleash the power of your fans
             and get your projects funded.
           </p>
@@ -84,14 +85,14 @@ export default function Home() {
 
       <div className="bg-gradient-to-r from-purple-500 via-pink-400 to-blue-500 opacity-20 h-1 rounded-full my-8"></div>
 
-      <div className="container mx-auto text-white pb-14 pt-16 px-4 md:px-10 mt-8 mb-8">
+      <div className="container mx-auto text-black dark:text-white pb-14 pt-16 px-4 md:px-10 mt-8 mb-8">
         <h2 className="text-4xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 drop-shadow-lg">
           Your Fans can support you
         </h2>
 
         <div className="flex flex-col md:flex-row gap-8 justify-evenly items-center">
           {/* First Item */}
-          <div className="item space-y-2 flex flex-col items-center justify-center bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-lg border border-white/20 w-full max-w-xs">
+          <div className="item space-y-2 flex flex-col items-center justify-center bg-black/10 dark:bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-lg border border-black/20 dark:border-white/20 w-full max-w-xs">
             <Image
               className="bg-slate-400 rounded-b-full p-2 text-black shadow-md"
               width={88}
@@ -102,13 +103,13 @@ export default function Home() {
             <p className="font-bold text-center text-lg">
               Your Fans Support You
             </p>
-            <p className="text-center text-sm text-white/80">
+            <p className="text-center text-sm text-black/80 dark:text-white/80">
               They love your work and want to contribute.
             </p>
           </div>
 
           {/* Second Item */}
-          <div className="item space-y-2 flex flex-col items-center justify-center bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-lg border border-white/20 w-full max-w-xs">
+          <div className="item space-y-2 flex flex-col items-center justify-center bg-black/10 dark:bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-lg border border-black/20 dark:border-white/20 w-full max-w-xs">
             <Image
               className="bg-slate-400 rounded-full p-1 text-black shadow-md"
               width={88}
@@ -117,13 +118,13 @@ export default function Home() {
               alt="Coin gif representing donation"
             />
             <p className="font-bold text-center text-lg">Get Small Donations</p>
-            <p className="text-center text-sm text-white/80">
+            <p className="text-center text-sm text-black/80 dark:text-white/80">
               Receive tips to fuel your creativity and projects.
             </p>
           </div>
 
           {/* Third Item */}
-          <div className="item space-y-2 flex flex-col items-center justify-center bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-lg border border-white/20 w-full max-w-xs">
+          <div className="item space-y-2 flex flex-col items-center justify-center bg-black/10 dark:bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-lg border border-black/20 dark:border-white/20 w-full max-w-xs">
             <Image
               className="bg-slate-400 rounded-b-full p-2 text-black shadow-md"
               width={88}
@@ -132,7 +133,7 @@ export default function Home() {
               alt="Group gif representing community support"
             />
             <p className="font-bold text-center text-lg">Build a Community</p>
-            <p className="text-center text-sm text-white/80">
+            <p className="text-center text-sm text-black/80 dark:text-white/80">
               Connect with supporters and grow your tribe.
             </p>
           </div>

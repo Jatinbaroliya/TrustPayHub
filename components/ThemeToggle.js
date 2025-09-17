@@ -1,26 +1,8 @@
 "use client";
-import { useState, useEffect } from 'react';
+import { useTheme } from "./ThemeContext";
 
 const ThemeToggle = () => {
-  const [isDark, setIsDark] = useState(true);
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      setIsDark(savedTheme === 'dark');
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    const newTheme = !isDark;
-    setIsDark(newTheme);
-    localStorage.setItem('theme', newTheme ? 'dark' : 'light');
-
-    // Apply theme to body
-    document.body.className = newTheme
-      ? 'text-white bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px]'
-      : 'text-black bg-white';
-  };
+  const { isDark, toggleTheme } = useTheme();
 
   return (
     <button
@@ -32,7 +14,7 @@ const ThemeToggle = () => {
         {/* Sun Icon */}
         <svg
           className={`w-6 h-6 text-yellow-400 transition-all duration-500 ${
-            isDark ? 'opacity-0 rotate-90 scale-0' : 'opacity-100 rotate-0 scale-100'
+            isDark ? "opacity-0 rotate-90 scale-0" : "opacity-100 rotate-0 scale-100"
           }`}
           fill="currentColor"
           viewBox="0 0 20 20"
@@ -47,7 +29,7 @@ const ThemeToggle = () => {
         {/* Moon Icon */}
         <svg
           className={`w-6 h-6 text-blue-400 absolute top-0 left-0 transition-all duration-500 ${
-            isDark ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-0'
+            isDark ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-0"
           }`}
           fill="currentColor"
           viewBox="0 0 20 20"
@@ -57,9 +39,11 @@ const ThemeToggle = () => {
       </div>
 
       {/* Glow effect */}
-      <div className={`absolute inset-0 rounded-full transition-opacity duration-500 ${
-        isDark ? 'bg-blue-400/20' : 'bg-yellow-400/20'
-      }`} />
+      <div
+        className={`absolute inset-0 rounded-full transition-opacity duration-500 ${
+          isDark ? "bg-blue-400/20" : "bg-yellow-400/20"
+        }`}
+      />
     </button>
   );
 };
