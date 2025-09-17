@@ -1,11 +1,9 @@
 import Dashboard from "@/components/Dashboard"
 
 const DashboardPage = () => {
-
-
   return (
     <div>
-      <Dashboard/>
+      <Dashboard />
     </div>
   )
 }

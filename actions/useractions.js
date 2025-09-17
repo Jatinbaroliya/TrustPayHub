@@ -42,7 +42,12 @@ export const initiate = async (amount, to_username, paymentform) => {
 export const fetchuser = async (username) => {
     await connectDb()
     const user = await User.findOne({ username })
-    return user?.toObject({ flattenObjectIds: true }) || null
+    if (!user) return null
+
+    const userObj = user.toObject({ flattenObjectIds: true })
+    // Ensure _id is string
+    userObj._id = userObj._id.toString()
+    return userObj
 }
 
 // Fetches recent completed payments sorted by amount descending
@@ -52,7 +57,16 @@ export const fetchpayments = async (username) => {
         .sort({ amount: -1 })
         .limit(7)
         .lean()
-    return payments
+
+    // Convert ObjectIds and BSON types to strings
+    const cleanPayments = payments.map(p => ({
+        ...p,
+        _id: p._id.toString(),
+        createdAt: p.createdAt ? p.createdAt.toISOString() : null,
+        updatedAt: p.updatedAt ? p.updatedAt.toISOString() : null,
+    }))
+
+    return cleanPayments
 }
 
 // Updates a user profile; handles username conflict and propagates changes to Payment

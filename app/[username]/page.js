@@ -5,10 +5,13 @@ import connectDb from '@/db/connectDb'
 import User from '@/models/User'
 
 const Username = async ({ params }) => {
+  const awaitedParams = await params;
+  const username = awaitedParams.username;
+
   //if the username is not present in the database then show a 404 error
   const checkUser = async() =>{
     await connectDb()
-    let u = await User.findOne({username: params.username})
+    let u = await User.findOne({username: username})
 
     if(!u)
     {
@@ -21,8 +24,8 @@ const Username = async ({ params }) => {
 
   return (
     <>
-     
-      <PaymentPage username = {params.username}/>
+
+      <PaymentPage username = {username}/>
 
 
     </>
@@ -32,7 +35,8 @@ const Username = async ({ params }) => {
 export default Username
 
 export async function generateMetadata({params}){
+   const awaitedParams = await params;
    return{
-    title: ` Support ${params.username} - TrustPayHub`,
+    title: ` Support ${awaitedParams.username} - TrustPayHub`,
    }
 }
