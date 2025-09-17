@@ -173,8 +173,9 @@ const PaymentPage = ({ username }) => {
                     donated{" "}
                     <span className="font-bold text-green-400">₹{p.amount}</span>
                     <div className="text-sm text-slate-700 dark:text-slate-300">
-                      "{p.message}"
+                      &quot;{p.message}&quot;
                     </div>
+
                   </div>
                 </li>
               ))}

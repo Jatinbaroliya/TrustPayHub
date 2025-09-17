@@ -207,7 +207,7 @@ const Dashboard = () => {
                       </div>
                       <div>
                         <p className="text-white font-medium">{payment.name}</p>
-                        <p className="text-slate-400 text-sm">"{payment.message}"</p>
+                        <p className="text-slate-400 text-sm">&quot;{payment.message}&quot;</p>
                       </div>
                     </div>
                     <div className="text-right">
