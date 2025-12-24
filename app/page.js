@@ -7,8 +7,8 @@ export default function Home() {
     <>
       <div className="flex flex-col justify-center items-center gap-6 text-black dark:text-white min-h-[50vh] px-5 md:px-0 text-xs md:text-base">
         <div className="bg-black/10 dark:bg-white/10 backdrop-blur-lg shadow-2xl rounded-2xl p-8 w-full max-w-2xl flex flex-col items-center gap-4 border border-black/20 dark:border-white/20 mt-8 mb-8 relative">
-          <div className="md:text-6xl font-extrabold flex items-center justify-center md:gap-6 gap-3 text-4xl">
-            <span className="text-5xl font-extrabold italic tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-400 to-blue-500 drop-shadow-lg">
+          <div className="md:text-6xl font-extrabold flex items-center justify-center md:gap-6 gap-3 text-4xl overflow-hidden">
+            <span className="text-3xl md:text-5xl font-extrabold italic tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-400 to-blue-500 drop-shadow-lg">
               TrustPayHub
             </span>
             <Image
@@ -16,7 +16,7 @@ export default function Home() {
               height={56}
               src="/logo.png"
               alt="Help handshake"
-              className="rounded-full bg-white dark:bg-black shadow-lg border-2 border-black/30 dark:border-white/30"
+              className="w-8 h-8 md:w-14 md:h-14 rounded-full bg-white dark:bg-black shadow-lg border-2 border-black/30 dark:border-white/30"
             />
           </div>
 
