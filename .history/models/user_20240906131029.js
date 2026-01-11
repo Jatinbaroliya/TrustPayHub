@@ -1,0 +1,11 @@
+import mongoose from "mongoose";
+const {Schema, model} = mongoose;
+
+const UserSchema = new Schema({
+    email: {type: string, required: true},
+    email: {type: string, required: true},
+    email: {type: string, required: true},
+    email: {type: string, required: true},
+    email: {type: string, required: true},
+})
+ 
