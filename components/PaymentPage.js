@@ -17,15 +17,25 @@ const PaymentPage = ({ username }) => {
   const [currentUser, setcurrentUser] = useState({});
   const [payments, setPayments] = useState([]);
   const [paymentLoading, setPaymentLoading] = useState(false);
+  const [razorpayLoaded, setRazorpayLoaded] = useState(false);
   const searchParams = useSearchParams();
   const router = useRouter();
 
   const getData = useCallback(async () => {
-    console.log("Fetching data for username:", username);
-    let u = await fetchuser(username);
-    setcurrentUser(u);
-    let dbpayments = await fetchpayments(username);
-    setPayments(dbpayments);
+    try {
+      console.log("Fetching data for username:", username);
+      const u = await fetchuser(username);
+      if (u) {
+        setcurrentUser(u);
+      }
+      const dbpayments = await fetchpayments(username);
+      if (dbpayments) {
+        setPayments(dbpayments);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      toast.error("Failed to load page data. Please refresh the page.");
+    }
   }, [username]);
 
   useEffect(() => {
@@ -58,10 +68,25 @@ const PaymentPage = ({ username }) => {
   };
 
   const pay = async (amount) => {
+    if (!currentUser.razorpayid) {
+      toast.error("Payment gateway not configured. Please contact support.");
+      return;
+    }
+
+    if (!razorpayLoaded || (typeof window !== "undefined" && !window.Razorpay)) {
+      toast.error("Payment gateway is loading. Please try again in a moment.");
+      return;
+    }
+
     setPaymentLoading(true);
     try {
-      let a = await initiate(amount, username, paymentform);
-      let orderId = a.id;
+      const orderResponse = await initiate(amount, username, paymentform);
+      
+      if (!orderResponse || !orderResponse.id) {
+        throw new Error("Failed to create payment order");
+      }
+
+      const orderId = orderResponse.id;
 
       const options = {
         key: currentUser.razorpayid,
@@ -71,7 +96,7 @@ const PaymentPage = ({ username }) => {
         description: "Support Transaction",
         image: "https://example.com/your_logo",
         order_id: orderId,
-        callback_url: `${process.env.NEXT_PUBLIC_URL}/api/razorpay`,
+        callback_url: `${process.env.NEXT_PUBLIC_URL || window.location.origin}/api/razorpay`,
         prefill: {
           name: paymentform.name,
           email: "gaurav.kumar@example.com",
@@ -85,14 +110,14 @@ const PaymentPage = ({ username }) => {
         },
       };
 
-      if (typeof window !== "undefined" && window.Razorpay) {
-        const rzp1 = new window.Razorpay(options);
-        rzp1.open();
-      } else {
-        toast.error("Razorpay SDK not loaded");
-      }
+      const rzp1 = new window.Razorpay(options);
+      rzp1.on("payment.failed", function (response) {
+        toast.error("Payment failed. Please try again.");
+      });
+      rzp1.open();
     } catch (error) {
-      toast.error("Payment initiation failed. Please try again.");
+      console.error("Payment error:", error);
+      toast.error(error.message || "Payment initiation failed. Please try again.");
     } finally {
       setPaymentLoading(false);
     }
@@ -101,7 +126,18 @@ const PaymentPage = ({ username }) => {
   return (
     <>
       <ToastContainer theme="light" />
-      <Script src="https://checkout.razorpay.com/v1/checkout.js" />
+      <Script
+        src="https://checkout.razorpay.com/v1/checkout.js"
+        strategy="afterInteractive"
+        onLoad={() => {
+          if (typeof window !== "undefined" && window.Razorpay) {
+            setRazorpayLoaded(true);
+          }
+        }}
+        onError={() => {
+          toast.error("Failed to load payment gateway. Please refresh the page.");
+        }}
+      />
 
       <div className="cover w-full bg-gradient-to-r from-purple-900 via-blue-900 to-pink-900 relative rounded-b-3xl shadow-lg overflow-visible mb-12">
         {currentUser.coverpic && (
@@ -142,7 +178,7 @@ const PaymentPage = ({ username }) => {
           <span className="font-semibold text-black dark:text-white">{payments.length}</span>{" "}
           Payments ·{" "}
           <span className="font-semibold text-green-400">
-            ₹{payments.reduce((a, b) => a + b.amount, 0)}
+            ₹{payments && Array.isArray(payments) ? payments.reduce((a, b) => a + (b.amount || 0), 0) : 0}
           </span>{" "}
           raised
         </div>
